@@ -32,12 +32,29 @@
                 <a href="">Companies</a>
             </div>
 
-            <div>
-                <a href="">Post a job</a>
-            </div>
+            @auth
+                <div class="font-bold flex gap-x-6">
+                    <a href="/jobs/create">Post a job</a>
+
+                    <form method="POST" action="/logout">
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">Log Out</button>
+                    </form>
+                </div>
+            @endauth
+
+            @guest
+                <div class="space-x-6 font-bold">
+                    <a href="/login">Log In</a>
+                    <a href="/register">Sign Up</a>
+                </div>
+            @endguest
+
         </nav>
 
-        <main class="mt-10 mx-auto max-w-[986px]">
+        <main class="my-10 mx-auto max-w-[986px]">
             {{ $slot }}
         </main>
     </div>
